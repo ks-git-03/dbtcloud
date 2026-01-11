@@ -1,0 +1,11 @@
+campaign_id,campaign_name,start_date,end_date,channel,budget
+1,Campaign 1,2023-05-17,2023-07-25,social,47551.94
+2,Campaign 2,2024-03-29,2024-06-25,display,41697.89
+3,Campaign 3,2024-04-01,2024-05-01,display,23053.42
+4,Campaign 4,2023-09-11,2023-10-26,display,31710.67
+5,Campaign 5,2023-10-09,2023-12-14,email,35963.7
+6,Campaign 6,2023-08-29,2023-10-12,social,16665.77
+7,Campaign 7,2023-03-24,2023-04-20,search,12331.81
+8,Campaign 8,2023-06-06,2023-07-13,email,21328.53
+9,Campaign 9,2023-12-05,2024-02-22,display,21372.94
+10,Campaign 10,2023-07-31,2023-10-02,display,45337.09
