@@ -1,0 +1,18 @@
+version: 2
+
+exposures:
+
+  - name: revenue_performance_dashboard
+    type: dashboard
+    maturity: high
+    description: >
+      Executive dashboard tracking revenue, discounts,
+      net sales, and payment performance over time.
+    url: https://bi.company.com/dashboards/revenue-performance
+    owner:
+      name: Finance Analytics Team
+      email: finance-analytics@company.com
+    depends_on:
+      - ref('fact_orders_daily')
+      - ref('dim_customer')
+      - ref('dim_products')
