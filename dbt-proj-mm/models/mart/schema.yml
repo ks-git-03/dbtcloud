@@ -6,7 +6,8 @@ models:
   # dim_customers
   # =========================
   - name: dim_customer
-    description: Customer dimension with lifetime metrics and loyalty tier
+    description: CCustomer dimension containing identity, lifetime value metrics,
+      and loyalty segmentation for analytics and BI reporting.
     latest_version: 1
 
     versions:
@@ -46,7 +47,8 @@ models:
   # dim_products
   # =========================
   - name: dim_products
-    description: Product dimension with supplier and pricing attributes
+    description: Product dimension enriched with supplier, category, pricing,
+      and segmentation attributes.
     latest_version: 1
 
     versions:
@@ -86,7 +88,8 @@ models:
   # fct_orders_daily
   # =========================
   - name: fact_orders_daily
-    description: Daily order fact table with revenue and payment metrics
+    description: Daily order-level fact table capturing revenue, discounts,
+      payment status, and net sales metrics.
     latest_version: 1
 
     versions:
