@@ -1,0 +1,136 @@
+version: 2
+
+models:
+
+  # =========================
+  # dim_customers
+  # =========================
+  - name: dim_customer
+    description: CCustomer dimension containing identity, lifetime value metrics,
+      and loyalty segmentation for analytics and BI reporting.
+    latest_version: 1
+
+    versions:
+      - v: 1
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: customer_id
+            data_type: number
+            tests:
+              - not_null
+              - unique
+
+          - name: first_name
+            data_type: varchar
+
+          - name: last_name
+            data_type: varchar
+
+          - name: customer_email
+            data_type: varchar
+
+          - name: first_order_date
+            data_type: date
+
+          - name: lifetime_orders
+            data_type: number
+
+          - name: lifetime_revenue
+            data_type: number(12,2)
+
+          - name: loyalty_tier
+            data_type: varchar
+
+  # =========================
+  # dim_products
+  # =========================
+  - name: dim_products
+    description: Product dimension enriched with supplier, category, pricing,
+      and segmentation attributes.
+    latest_version: 1
+
+    versions:
+      - v: 1
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: product_id
+            data_type: number
+            constraints:
+              - type: not_null
+              - type: primary_key
+
+          - name: product_name
+            data_type: varchar
+
+          - name: product_brand
+            data_type: varchar
+
+          - name: product_category
+            data_type: varchar
+            tests:
+              - accepted_values:
+                  values: ['APPAREL', 'ELECTRONICS', 'GROCERY', 'HOME', 'BEAUTY']
+
+          - name: supplier_name
+            data_type: varchar
+
+          - name: unit_price
+            data_type: number(10,2)
+
+          - name: price_bucket
+            data_type: varchar
+
+  # =========================
+  # fct_orders_daily
+  # =========================
+  - name: fact_orders_daily
+    description: Daily order-level fact table capturing revenue, discounts,
+      payment status, and net sales metrics.
+    latest_version: 1
+
+    versions:
+      - v: 1
+        config:
+          contract:
+            enforced: true
+        columns:
+          - name: order_id
+            data_type: number
+            constraints:
+              - type: not_null
+
+          - name: order_date
+            data_type: date
+
+          - name: customer_id
+            data_type: number
+            tests:
+              - net_sales_non_negative
+              - relationships:
+                  to: ref('dim_customer')
+                  field: customer_id
+
+          - name: gross_sales
+            data_type: number(12,2)
+
+          - name: discount_amt
+            data_type: number(12,2)
+
+          - name: net_sales
+            data_type: number(12,2)
+
+          - name: net_revenue
+            data_type: number(12,2)
+
+          - name: total_payments
+            data_type: number(12,2)
+
+          - name: total_refunds
+            data_type: number(12,2)
+
+          - name: payment_status
+            data_type: varchar
